@@ -50,7 +50,7 @@ public class RaftNode {
 
     // Election timer
     private volatile long lastHeartbeatOrVoteMs = System.currentTimeMillis();
-    private volatile long electionTimeoutMs = randomElectionTimeout();
+    private volatile long electionTimeoutMs;
 
     public RaftNode(NodeProperties nodeProperties,
                     PeerSet peerSet,
@@ -71,6 +71,7 @@ public class RaftNode {
 
         // index starts at 1 for simplicity
         log.add(dummyEntry0());
+        this.electionTimeoutMs = randomElectionTimeout();
     }
 
     private LogEntry dummyEntry0() {
